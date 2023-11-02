@@ -48,6 +48,11 @@
     "test": "npm run prettier:check && npm run typecheck && npm run lint && npm run jest",
     "release": "npm test && esno scripts/release"
   },
+  "dependencies": {
+    "chalk": "^5",
+    "fs-extra": "^11",
+    "react-docgen-typescript": "^2.2.2"
+  },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^25.0.7",
     "@rollup/plugin-node-resolve": "^15.2.3",
@@ -63,7 +68,6 @@
     "eslint": "^8.52.0",
     "esno": "^0.17.0",
     "execa": "^8.0.1",
-    "fs-extra": "^11.1.1",
     "jest": "^29.7.0",
     "new-github-release-url": "^2.0.0",
     "open": "^9.1.0",
