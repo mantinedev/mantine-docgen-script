@@ -1,1 +1,1 @@
-export { add } from './add';
+export { generateDeclarations } from './generate-declarations';
