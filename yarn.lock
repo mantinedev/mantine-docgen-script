@@ -1308,44 +1308,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rtivital/ts-package-template@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "@rtivital/ts-package-template@workspace:."
-  dependencies:
-    "@rollup/plugin-commonjs": "npm:^25.0.7"
-    "@rollup/plugin-node-resolve": "npm:^15.2.3"
-    "@rollup/plugin-replace": "npm:^5.0.4"
-    "@types/fs-extra": "npm:^11"
-    "@types/jest": "npm:^29.5.6"
-    "@types/node": "npm:^20.8.9"
-    "@types/signale": "npm:^1"
-    "@types/yargs": "npm:^17.0.29"
-    "@typescript-eslint/eslint-plugin": "npm:^6.9.0"
-    "@typescript-eslint/parser": "npm:^6.9.0"
-    chalk: "npm:^5"
-    esbuild: "npm:^0.19.5"
-    eslint: "npm:^8.52.0"
-    esno: "npm:^0.17.0"
-    execa: "npm:^8.0.1"
-    fs-extra: "npm:^11"
-    jest: "npm:^29.7.0"
-    new-github-release-url: "npm:^2.0.0"
-    open: "npm:^9.1.0"
-    prettier: "npm:^3.0.3"
-    react-docgen-typescript: "npm:^2.2.2"
-    rimraf: "npm:^5.0.5"
-    rollup: "npm:^4.1.4"
-    rollup-plugin-esbuild: "npm:^6.1.0"
-    rollup-plugin-node-externals: "npm:^6.1.2"
-    signale: "npm:^1.4.0"
-    simple-git: "npm:^3.20.0"
-    ts-jest: "npm:^29.1.1"
-    typescript: "npm:^5.2.2"
-    version-next: "npm:^1.0.2"
-    yargs: "npm:^17.7.2"
-  languageName: unknown
-  linkType: soft
-
 "@sinclair/typebox@npm:^0.27.8":
   version: 0.27.8
   resolution: "@sinclair/typebox@npm:0.27.8"
@@ -4320,6 +4282,44 @@ __metadata:
   checksum: b0e6e599780ce6bab49cc413eba822f7d1f0dfebd1c103eaa3785c59e43e22c59018323cf9e1708f0ef5329e94a745d163fcbb6bff8e4c6742f9be9e86f3500c
   languageName: node
   linkType: hard
+
+"mantine-docgen-script@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "mantine-docgen-script@workspace:."
+  dependencies:
+    "@rollup/plugin-commonjs": "npm:^25.0.7"
+    "@rollup/plugin-node-resolve": "npm:^15.2.3"
+    "@rollup/plugin-replace": "npm:^5.0.4"
+    "@types/fs-extra": "npm:^11"
+    "@types/jest": "npm:^29.5.6"
+    "@types/node": "npm:^20.8.9"
+    "@types/signale": "npm:^1"
+    "@types/yargs": "npm:^17.0.29"
+    "@typescript-eslint/eslint-plugin": "npm:^6.9.0"
+    "@typescript-eslint/parser": "npm:^6.9.0"
+    chalk: "npm:^5"
+    esbuild: "npm:^0.19.5"
+    eslint: "npm:^8.52.0"
+    esno: "npm:^0.17.0"
+    execa: "npm:^8.0.1"
+    fs-extra: "npm:^11"
+    jest: "npm:^29.7.0"
+    new-github-release-url: "npm:^2.0.0"
+    open: "npm:^9.1.0"
+    prettier: "npm:^3.0.3"
+    react-docgen-typescript: "npm:^2.2.2"
+    rimraf: "npm:^5.0.5"
+    rollup: "npm:^4.1.4"
+    rollup-plugin-esbuild: "npm:^6.1.0"
+    rollup-plugin-node-externals: "npm:^6.1.2"
+    signale: "npm:^1.4.0"
+    simple-git: "npm:^3.20.0"
+    ts-jest: "npm:^29.1.1"
+    typescript: "npm:^5.2.2"
+    version-next: "npm:^1.0.2"
+    yargs: "npm:^17.7.2"
+  languageName: unknown
+  linkType: soft
 
 "merge-stream@npm:^2.0.0":
   version: 2.0.0

@@ -1,35 +1,111 @@
-# ts-package-template
+# mantine-docgen-script
 
-A template to publish a TypeScript package to npm.
+A script to generate props table data based on TypeScript props definition. Specific to Mantine components.
 
-Included tools:
+## Installation
 
-- Yarn v4
-- Rollup
-- esbuild
-- jest
-- prettier
-- ESLint
+```bash
+yarn add --dev mantine-docgen-script
+```
 
 ## Usage
 
-- Click "Use this template" button to create a new repository from this template
-- Clone the new repository
-- Change `package.json` to your own package name, description, etc. **!important**: change `repository.url` and other repository links to your own repository url
-- Install dependencies: `yarn` (other package managers are not supported)
-- Write your code in `src/` directory
-- Run `npm run release` to build and publish your package to npm
+Create a script in your `package.json` that runs with [esno](https://www.npmjs.com/package/esno):
 
-## Publishing to npm
+```json
+{
+  "scripts": {
+    "docgen": "esno scripts/docgen"
+  }
+}
+```
 
-Use `release` script to publish the package:
+Then create `scripts/docgen.ts` file with the following content:
 
-- `npm run release` – release a new patch version to npm
-- `npm run release minor` – release a new minor version to npm
-- `npm run release major` – release a new major version to npm
-- `npm run release minor -- --stage alpha` – release a new minor alpha version to npm (for example, `1.1.0-alpha.0`)
+```ts
+import path from 'path';
+import { generateDeclarations } from './docgen-script';
 
-Note that release script will always publish public packages to npm. If you want to publish a private package, change release script in `scripts/release.ts`.
+// Utility function to resolve component path
+const getComponentPath = (componentPath: string) =>
+  path.join(process.cwd(), 'package/src', componentPath);
+
+generateDeclarations({
+  // A list of components to generate docs for
+  componentsPaths: [getComponentPath('TestComponent.tsx')],
+
+  // Path to your main tsconfig.json file
+  tsConfigPath: path.join(process.cwd(), 'tsconfig.json'),
+
+  // Path to where docgen json file must be output
+  outputPath: path.join(process.cwd(), 'docs'),
+});
+```
+
+Then run `npm run docgen` to generate `docs/docgen.json` file with props table data.
+
+## Example
+
+Given the path to the following component:
+
+```tsx
+import React from 'react';
+import { Box, BoxProps, ElementProps, MantineColor } from '@mantine/core';
+import classes from './TestComponent.module.css';
+
+export interface TestComponentProps extends BoxProps, ElementProps<'div'> {
+  /** Label displayed inside the component, `'TestComponent'` by default */
+  label: React.ReactNode;
+
+  /** Key of `theme.colors` or any valid CSS color */
+  color: MantineColor;
+}
+
+export function TestComponent({ label, ...others }: TestComponentProps) {
+  return (
+    <Box className={classes.root} {...others}>
+      {label}
+    </Box>
+  );
+}
+```
+
+The script will generate the following output:
+
+```json
+{
+  "TestComponent": {
+    "filePath": "... (file path on your computer here)",
+    "displayName": "TestComponent",
+    "props": {
+      "color": {
+        "defaultValue": null,
+        "description": "Key of <code>theme.colors</code> or any valid CSS color",
+        "name": "color",
+        "required": true,
+        "type": {
+          "name": "MantineColor"
+        }
+      },
+      "label": {
+        "defaultValue": null,
+        "description": "Label displayed inside the component, <code>'TestComponent'</code> by default",
+        "name": "label",
+        "required": true,
+        "type": {
+          "name": "React.ReactNode"
+        }
+      }
+    }
+  }
+}
+```
+
+## Where to use
+
+The script is used in main Mantine repository to generate data for components props tables.
+It is also used in Mantine extensions published as separate packages. Most likely, you
+do not need to install and setup it manually – it comes by default with extension template.
 
 ## License
 
