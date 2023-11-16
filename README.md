@@ -75,11 +75,8 @@ The script will generate the following output:
 ```json
 {
   "TestComponent": {
-    "filePath": "... (file path on your computer here)",
-    "displayName": "TestComponent",
     "props": {
       "color": {
-        "defaultValue": null,
         "description": "Key of <code>theme.colors</code> or any valid CSS color",
         "name": "color",
         "required": true,
@@ -88,7 +85,6 @@ The script will generate the following output:
         }
       },
       "label": {
-        "defaultValue": null,
         "description": "Label displayed inside the component, <code>'TestComponent'</code> by default",
         "name": "label",
         "required": true,
