@@ -18,7 +18,9 @@ export async function generateDeclarations(options: DocgenOptions) {
     .parse(options.componentsPaths)
     .reduce<Record<string, any>>((acc, declaration) => {
       const componentName = getDisplayName(declaration.displayName);
-      acc[componentName] = prepareDeclaration(declaration, options);
+      if (!componentName.includes('.extend')) {
+        acc[componentName] = prepareDeclaration(declaration, options);
+      }
       return acc;
     }, {});
 

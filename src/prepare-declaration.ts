@@ -8,10 +8,13 @@ export function prepareDeclaration(declaration: ComponentDoc, options: DocgenOpt
   const data: any = { ...declaration };
   delete data.tags;
   delete data.methods;
+  delete data.filePath;
+  delete data.displayName;
 
   Object.keys(data.props).forEach((prop) => {
     delete data.props[prop].parent;
     delete data.props[prop].declarations;
+    delete data.props[prop].defaultValue;
     delete data.description;
 
     if (data.props[prop].type.name === 'enum') {
