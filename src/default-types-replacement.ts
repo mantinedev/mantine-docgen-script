@@ -20,4 +20,6 @@ export const DEFAULT_TYPE_REPLACEMENT = {
     'React.ComponentPropsWithoutRef<"img">',
   'Omit<DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>, "ref"> | undefined':
     'React.ComponentPropsWithoutRef<"button">',
+  'Omit<DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, "ref"> | undefined':
+    'React.ComponentPropsWithoutRef<"input">',
 };

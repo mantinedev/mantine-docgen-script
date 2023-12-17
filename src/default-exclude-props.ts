@@ -61,4 +61,7 @@ export const DEFAULT_EXCLUDE_PROPS = [
   'renderRoot',
   'lightHidden',
   'darkHidden',
+  'flex',
+  'bd',
+  'bdrs',
 ];
