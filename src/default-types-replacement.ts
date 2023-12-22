@@ -22,4 +22,8 @@ export const DEFAULT_TYPE_REPLACEMENT = {
     'React.ComponentPropsWithoutRef<"button">',
   'Omit<DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, "ref"> | undefined':
     'React.ComponentPropsWithoutRef<"input">',
+  '(text: string, reviver?: (this: any, key: string, value: any) => any) => any':
+    'typeof JSON.parse',
+  '{ (value: any, replacer?: (this: any, key: string, value: any) => any, space?: string | number): string; (value: any, replacer?: (string | number)[], space?: string | number): string; }':
+    'typeof JSON.stringify',
 };
