@@ -1,7 +1,7 @@
 {
   "name": "mantine-docgen-script",
   "description": "A script to generate props table data based on TypeScript props definition. Specific to Mantine components.",
-  "packageManager": "yarn@4.0.2",
+  "packageManager": "yarn@4.9.1",
   "version": "1.3.1",
   "type": "module",
   "author": "Vitaly Rtishchev <rtivital@gmail.com>",
