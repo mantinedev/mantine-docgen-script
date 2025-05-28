@@ -1,10 +1,10 @@
 import React from 'react';
 
 export interface TestComponentProps {
-  /** Test component text prop */
+  /** Test component text prop, @default "Hello World" */
   text: string;
 
-  /** Test component number prop */
+  /** Test component number prop, @default JSON.parse */
   parse?: typeof JSON.parse;
 
   /** Test component string prop */

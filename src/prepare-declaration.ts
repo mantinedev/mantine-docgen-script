@@ -14,7 +14,6 @@ export function prepareDeclaration(declaration: ComponentDoc, options: DocgenOpt
   Object.keys(data.props).forEach((prop) => {
     delete data.props[prop].parent;
     delete data.props[prop].declarations;
-    delete data.props[prop].defaultValue;
     delete data.description;
 
     if (data.props[prop].type.name === 'enum') {
@@ -27,6 +26,12 @@ export function prepareDeclaration(declaration: ComponentDoc, options: DocgenOpt
 
     if (prop === 'radius') {
       data.props[prop].type.name = 'MantineRadius | number';
+    }
+
+    if (data.props[prop].defaultValue?.value) {
+      data.props[prop].defaultValue = data.props[prop].defaultValue.value;
+    } else {
+      data.props[prop].defaultValue = null;
     }
 
     data.props[prop].type.name = data.props[prop].type.name
