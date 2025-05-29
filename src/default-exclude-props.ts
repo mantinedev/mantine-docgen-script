@@ -17,6 +17,10 @@ export const DEFAULT_EXCLUDE_PROPS = [
   'ml',
   'mr',
   'mb',
+  'ms',
+  'me',
+  'ps',
+  'pe',
   'p',
   'px',
   'py',
@@ -64,4 +68,5 @@ export const DEFAULT_EXCLUDE_PROPS = [
   'flex',
   'bd',
   'bdrs',
+  'attributes',
 ];
