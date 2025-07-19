@@ -10,12 +10,12 @@ yarn add --dev mantine-docgen-script
 
 ## Usage
 
-Create a script in your `package.json` that runs with [esno](https://www.npmjs.com/package/esno):
+Create a script in your `package.json` that runs with [tsx](https://www.npmjs.com/package/tsx):
 
 ```json
 {
   "scripts": {
-    "docgen": "esno scripts/docgen"
+    "docgen": "tsx scripts/docgen"
   }
 }
 ```
