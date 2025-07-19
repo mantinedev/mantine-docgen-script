@@ -39,6 +39,10 @@ export function prepareDeclaration(declaration: ComponentDoc, options: DocgenOpt
       .replace('undefined |', '')
       .replace('"xs" | "sm" | "md" | "lg" | "xl"', 'MantineSize')
       .trim();
+
+    if (data.props[prop].type.name.startsWith('(') && data.props[prop].type.name.endsWith(')')) {
+      data.props[prop].type.name = data.props[prop].type.name.slice(1, -1);
+    }
   });
 
   const ordered = Object.keys(data.props)
