@@ -85,7 +85,11 @@ async function release() {
   const revertVersion = await updateVersion(nextVersion);
 
   await run(
-    execa('npm', ['publish', '--access', 'public', '--tag', versionStage ? 'next' : 'latest']),
+    // stdio is inherited so that npm can prompt for the 2FA one-time password:
+    // it only asks when both stdin and stdout are TTYs, and throws EOTP otherwise
+    execa('npm', ['publish', '--access', 'public', '--tag', versionStage ? 'next' : 'latest'], {
+      stdio: 'inherit',
+    }),
     {
       info: 'Publishing the package to npm',
       success: 'The package has been published to npm',
