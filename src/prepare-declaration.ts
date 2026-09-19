@@ -1,20 +1,24 @@
 import type { ComponentDoc } from 'react-docgen-typescript';
-import { replaceBackticks } from './replace-backticks';
 import { DEFAULT_TYPE_REPLACEMENT } from './default-types-replacement';
+import { replaceBackticks } from './replace-backticks';
 import type { DocgenOptions } from './types';
 
 export function prepareDeclaration(declaration: ComponentDoc, options: DocgenOptions) {
-  const typesReplacement = { ...DEFAULT_TYPE_REPLACEMENT, ...(options.typesReplacement || {}) };
+  const typesReplacement: Record<string, string> = {
+    ...DEFAULT_TYPE_REPLACEMENT,
+    ...(options.typesReplacement || {}),
+  };
   const data: any = { ...declaration };
   delete data.tags;
   delete data.methods;
   delete data.filePath;
   delete data.displayName;
+  delete data.description;
 
   Object.keys(data.props).forEach((prop) => {
-    delete data.props[prop].parent;
+    data.props[prop].parent = data.props[prop].parent?.name ?? null;
+    data.props[prop].tags = data.props[prop].tags ?? {};
     delete data.props[prop].declarations;
-    delete data.description;
 
     if (data.props[prop].type.name === 'enum') {
       data.props[prop].type.name = data.props[prop].type.raw;

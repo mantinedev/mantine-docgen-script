@@ -8,6 +8,16 @@ A script to generate props table data based on TypeScript props definition. Spec
 yarn add --dev mantine-docgen-script
 ```
 
+## Requirements
+
+- Node.js 22.12 or higher.
+- The package is **ESM-only** – it must be imported with `import`, not `require`.
+- TypeScript is a peer requirement of [react-docgen-typescript](https://www.npmjs.com/package/react-docgen-typescript),
+  which reads the compiler API from the TypeScript version installed in your project.
+  Versions 4.3 up to 6.x are supported. **TypeScript 7 does not work**: it is the native
+  port and no longer exposes the JavaScript compiler API (`ts.createProgram`, `ts.sys` and
+  friends) that the parser depends on.
+
 ## Usage
 
 Create a script in your `package.json` that runs with [tsx](https://www.npmjs.com/package/tsx):
@@ -23,8 +33,8 @@ Create a script in your `package.json` that runs with [tsx](https://www.npmjs.co
 Then create `scripts/docgen.ts` file with the following content:
 
 ```ts
-import path from 'path';
-import { generateDeclarations } from './docgen-script';
+import path from 'node:path';
+import { generateDeclarations } from 'mantine-docgen-script';
 
 // Utility function to resolve component path
 const getComponentPath = (componentPath: string) =>
@@ -77,21 +87,69 @@ The script will generate the following output:
   "TestComponent": {
     "props": {
       "color": {
+        "defaultValue": null,
         "description": "Key of <code>theme.colors</code> or any valid CSS color",
         "name": "color",
+        "parent": "TestComponentProps",
         "required": true,
         "type": {
           "name": "MantineColor"
-        }
+        },
+        "tags": {}
       },
       "label": {
+        "defaultValue": null,
         "description": "Label displayed inside the component, <code>'TestComponent'</code> by default",
         "name": "label",
+        "parent": "TestComponentProps",
         "required": true,
         "type": {
           "name": "React.ReactNode"
-        }
+        },
+        "tags": {}
       }
+    }
+  }
+}
+```
+
+## Output shape
+
+Every prop has the following fields:
+
+- `name` – prop name
+- `description` – the main JSDoc comment converted to HTML (backticks become `<code>`), without JSDoc tags
+- `type.name` – prop type, after `typesReplacement` is applied
+- `required` – whether the prop is required
+- `defaultValue` – the value of the `@default` tag as a string, or `null` when the tag is not set
+- `parent` – name of the interface or type alias that declares the prop (for example `__InputProps` for props inherited from `Input`), or `null` when it cannot be resolved
+- `tags` – map of all JSDoc tags on the prop, always present. A tag without text has an empty string value (`{ "deprecated": "" }`). Tags that are repeated on the same prop are joined with a newline. `tags.default` duplicates `defaultValue`, use `defaultValue`.
+
+```tsx
+export interface TestComponentProps {
+  /**
+   * Whether the component has a border
+   * @category visual
+   * @default false
+   * @deprecated Use `variant="outline"` instead
+   */
+  withBorder?: boolean;
+}
+```
+
+```json
+{
+  "withBorder": {
+    "defaultValue": "false",
+    "description": "Whether the component has a border",
+    "name": "withBorder",
+    "parent": "TestComponentProps",
+    "required": false,
+    "type": { "name": "boolean" },
+    "tags": {
+      "category": "visual",
+      "default": "false",
+      "deprecated": "Use `variant=\"outline\"` instead"
     }
   }
 }

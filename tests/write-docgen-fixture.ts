@@ -1,5 +1,5 @@
-import path from 'node:path';
 import { generateDeclarations } from '../src';
+import path from 'node:path';
 
 generateDeclarations({
   tsConfigPath: path.join(process.cwd(), 'tsconfig.json'),

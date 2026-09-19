@@ -1,10 +1,10 @@
-import path from 'path';
-import fs from 'fs-extra';
 import chalk from 'chalk';
+import fs from 'fs-extra';
+import { getDisplayName } from './get-display-name';
 import { getDocgenParser } from './get-docgen-parser';
 import { prepareDeclaration } from './prepare-declaration';
 import type { DocgenOptions } from './types';
-import { getDisplayName } from './get-display-name';
+import path from 'node:path';
 
 export async function generateDeclarations(options: DocgenOptions) {
   options.componentsPaths.forEach((componentPath) => {
