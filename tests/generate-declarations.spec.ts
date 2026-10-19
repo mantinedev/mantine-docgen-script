@@ -63,3 +63,44 @@ describe('generateDeclarations', () => {
     expect(props.stringify.defaultValue).toBeNull();
   });
 });
+
+describe('generateDeclarations splitOutput', () => {
+  const splitOutputPath = fs.mkdtempSync(path.join(os.tmpdir(), 'mantine-docgen-split-'));
+  const componentsPath = path.join(splitOutputPath, 'components');
+
+  beforeAll(async () => {
+    fs.outputJsonSync(path.join(componentsPath, 'Stale.json'), { props: {} });
+
+    await generateDeclarations({
+      tsConfigPath: path.join(process.cwd(), 'tsconfig.json'),
+      outputPath: splitOutputPath,
+      componentsPaths: [path.join(process.cwd(), 'tests/TestComponent.tsx')],
+      excludeProps: [],
+      typesReplacement: {},
+      splitOutput: true,
+    });
+  });
+
+  afterAll(() => {
+    fs.removeSync(splitOutputPath);
+  });
+
+  it('does not write per-component files by default', () => {
+    expect(fs.existsSync(path.join(outputPath, 'components'))).toBe(false);
+  });
+
+  it('writes docgen.json alongside per-component files', () => {
+    const data = fs.readJsonSync(path.join(splitOutputPath, 'docgen.json'));
+    expect(Object.keys(data)).toEqual(['TestComponent']);
+  });
+
+  it('writes one file per component equal to the matching docgen.json entry', () => {
+    const data = fs.readJsonSync(path.join(splitOutputPath, 'docgen.json'));
+    const component = fs.readJsonSync(path.join(componentsPath, 'TestComponent.json'));
+    expect(component).toEqual(data.TestComponent);
+  });
+
+  it('removes files of components that no longer exist', () => {
+    expect(fs.readdirSync(componentsPath)).toEqual(['TestComponent.json']);
+  });
+});

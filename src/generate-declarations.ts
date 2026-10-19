@@ -28,4 +28,17 @@ export async function generateDeclarations(options: DocgenOptions) {
   await fs.writeJSON(path.join(options.outputPath, 'docgen.json'), declarations, {
     spaces: 2,
   });
+
+  if (options.splitOutput) {
+    await writeComponentFiles(path.join(options.outputPath, 'components'), declarations);
+  }
+}
+
+async function writeComponentFiles(componentsPath: string, declarations: Record<string, any>) {
+  await fs.emptyDir(componentsPath);
+  await Promise.all(
+    Object.entries(declarations).map(([componentName, declaration]) =>
+      fs.writeJSON(path.join(componentsPath, `${componentName}.json`), declaration, { spaces: 2 })
+    )
+  );
 }

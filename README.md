@@ -54,6 +54,22 @@ generateDeclarations({
 
 Then run `npm run docgen` to generate `docs/docgen.json` file with props table data.
 
+### Per-component files
+
+Pass `splitOutput: true` to also write one file per component to `docs/components/<ComponentName>.json`.
+Each file holds the same object as the matching `docgen.json` entry. Use it to load props data of a
+single component on demand, for example with a dynamic import, instead of bundling the whole `docgen.json`.
+The `components` directory is recreated on every run, so files of removed components do not linger.
+
+```ts
+generateDeclarations({
+  componentsPaths: [getComponentPath('TestComponent.tsx')],
+  tsConfigPath: path.join(process.cwd(), 'tsconfig.json'),
+  outputPath: path.join(process.cwd(), 'docs'),
+  splitOutput: true,
+});
+```
+
 ## Example
 
 Given the path to the following component:
